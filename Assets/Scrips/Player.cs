@@ -26,5 +26,19 @@ public class Player : NetworkBehaviour
 
             rd.velocity = new Vector2(inputX, inputY) * speed;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Pedindo uma pirulito para o Server!");
+            TalkToServer();
+        }
     }
-}
+    
+   
+
+    [Command]
+    void TalkToServer()
+    {
+        Debug.Log("Player pediu um pirulito!");
+    }
+ }
