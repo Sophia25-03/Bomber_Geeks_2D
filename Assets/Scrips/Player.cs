@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+
 public class Player : NetworkBehaviour
 {
+    public int coins;
     Rigidbody2D rd;
     float inputX;
     float inputY;
@@ -33,12 +35,20 @@ public class Player : NetworkBehaviour
             TalkToServer();
         }
     }
-    
-   
 
     [Command]
     void TalkToServer()
     {
         Debug.Log("Player pediu um pirulito!");
     }
- }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            coins++;
+            MyNetworkManager.spawnedCoins--;
+            Destroy(collision.gameObject);
+        }
+    }
+}
